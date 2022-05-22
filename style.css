@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Open+Sans&display=swap');
+
+:root{
+    --wood: hsl(20, 84%, 17%);
+    --wood-dark: hsl(20, 85%, 13%);
+    --paper: rgb(248, 244, 239);
+    --gold: rgb(228, 206, 132);
+    --shadow: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+}
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body p, h2, h3, h4{
+    font-family: 'MerriWeather','Times New Roman', Times, serif;
+}
+
+body h1, div{
+    font-family:'Open Sans', Helvetica, sans-serif ;
+}
+
+header{
+    padding: 10px 30px;
+    height: 100px;
+    z-index: 2;
+    position:relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--wood);
+    box-shadow: 0 0 10px var(--shadow);
+}
+
+header::after{
+    content:"";
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    height: 10px;
+    width:100%;
+    background-color: var(--gold);
+    box-shadow: 0 0 6px var(--shadow);
+}
+
+header .logo{
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header svg{
+    width: 40px;
+    height:40px;
+    color: var(--paper);
+}
+
+header .add-book{
+    width: 150px;
+    height: 70%;
+    border-radius: 5px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 2rem;
+
+    background-color: var(--paper);
+    box-shadow: 0 0 6px var(--shadow);
+}
+
+header h2{
+    font-size: 4rem;
+    color: var(--paper);
+}
+
+main{
+    padding: 20px 30px;
+    flex:1;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--paper);
+}
+
+body main h1{
+    text-align: center;
+    font-size: 3.5rem;
+    padding-bottom: 15px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 25px;
+}
+
+.card{
+    height: 220px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px var(--shadow);
+}
+
+.card h2{
+    padding: 8px;
+    height: 80px;
+    width: 100%;
+    font-size: 2.5rem;
+
+    display: grid;
+    place-items: center;
+    text-align: center;
+    
+    background-color: var(--wood-dark);
+    box-shadow: 0 1px 4px var(--shadow);
+    color: var(--paper);
+}
+
+.card .info{
+    width:100%;
+    padding: 15px;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+ 
+}
+
+.card h3{
+    font-size: 2em;
+}
+
+.card h4{
+    font-size: 1.7rem;
+}
+
+.card .buttons{
+    width: 100%;
+    font-size: 1.5rem;
+
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.card .buttons div{
+    width:50%;
+    height: 3rem;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px var(--shadow);
+    background-color: var(--gold);
+}
+
+main h1{
+    font-size: 3rem;
+}
+
+
+
+footer{
+    height:70px;
+    background-color: var(--wood-dark);
+}
