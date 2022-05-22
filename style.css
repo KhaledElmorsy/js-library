@@ -17,7 +17,7 @@
 }
 
 body {
-    height:100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -122,7 +122,11 @@ body main h1{
     box-shadow: 0 3px 5px var(--shadow);
 }
 
-.card h2{
+.card.template{
+    display: none;
+}
+
+.card .name{
     padding: 8px;
     height: 80px;
     width: 100%;
@@ -151,11 +155,11 @@ body main h1{
  
 }
 
-.card h3{
+.card .author{
     font-size: 2em;
 }
 
-.card h4{
+.card .pages{
     font-size: 1.7rem;
 }
 
