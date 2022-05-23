@@ -225,7 +225,7 @@ main h1{
     position: absolute;
     top:30vh;
     left:40vw;
-    width:max(400px,40vw);
+    width: clamp(400px,40vw,600px);
     height:400px;
     z-index: 2;
 
