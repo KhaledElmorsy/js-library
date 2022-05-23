@@ -43,11 +43,6 @@ const myLib = new Library();
 myLib.addBook('Lotr','JK',200,false);
 myLib.addBook('Harry', 'Jojo', 120, true);
 myLib.addBook('Lotr','JK',200,false);
-console.dir(myLib);
-
-
-
-const addBook = document.querySelector('.add-book');
 
 const modal = document.querySelector('.modal')
 
