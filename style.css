@@ -117,9 +117,17 @@ body main h1{
 
     overflow: hidden;
 
+    transition: transform 1s ease-out,
+                opacity 1s ease-in;
+
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 5px var(--shadow);
+}
+
+.card.remove{
+    opacity: 0;
+    transform: scale(0);
 }
 
 .card.template{
