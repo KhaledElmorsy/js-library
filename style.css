@@ -241,7 +241,7 @@ main h1{
     font-size: 3rem;
     height: 100px;
 
-
+    text-align: center;
     
     color: var(--paper);
     background-color: var(--wood-dark)
