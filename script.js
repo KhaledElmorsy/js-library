@@ -48,3 +48,21 @@ console.dir(myLib);
 
 
 const addBook = document.querySelector('.add-book');
+
+const modal = document.querySelector('.modal')
+
+modal.onmousedown = (e)=> {
+    let type = e.target.type;
+    if (['text','submit','number'].indexOf(type) != -1) return;
+
+    let styles = getComputedStyle(modal);
+    startX = e.clientX - styles.left.replace('px', "");
+    startY = e.clientY - styles.top.replace('px', "");
+    
+    modal.onmousemove = (e)=> {
+        modal.style.top = (e.clientY - startY) + 'px';
+        modal.style.left = (e.clientX - startX) + 'px';
+    } 
+}
+
+modal.onmouseup = ()=> modal.onmousemove = null;

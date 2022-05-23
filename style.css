@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    user-select: none;
 }
 
 body p, h2, h3, h4, input{
@@ -203,11 +204,17 @@ main h1{
     width:max(400px,40vw);
     height:400px;
 
+    cursor: grab;
+
     border: 4px solid white;
     box-shadow: 0 0 6px var(--shadow);
     border-radius: 20px;
     background-color: var(--paper);
     overflow: hidden;
+}
+
+.modal:active{
+    cursor: grabbing;
 }
 
 .modal h1{
