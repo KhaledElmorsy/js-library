@@ -246,6 +246,14 @@ main h1{
     color: var(--paper);
     background-color: var(--wood-dark)
 }
+.modal input[type="number"] {
+    text-align: end;
+}
+
+.modal input[type="number"]::-webkit-inner-spin-button {
+    opacity:1; 
+    margin-left:10px;
+}
 
 .modal input{
     font-size: 2rem;
