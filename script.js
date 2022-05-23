@@ -27,7 +27,6 @@ function Book(name, author, pages) {
 Book.prototype.readToggle = function(){
     this.read = !this.read;
     this.card.classList.toggle("read")
-    console.log(this.read)
     this.readButton.innerText = (this.read)? 'Read' : 'Not read'
 }
 Book.prototype.removeCard = function(){
