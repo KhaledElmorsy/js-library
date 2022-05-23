@@ -65,21 +65,29 @@ document.onmousedown = (e) => {
 
 }
 
-const addBook = document.querySelector('.add-book');
-addBook.addEventListener('click', (e)=>{
-    modal.classList.toggle('scaled');
-    setTimeout(()=>{
-        modal.style.top = '30vh';
-        modal.style.left = '30vw';},200)
-})
-
 const form = document.querySelector('form')
+const nameInput = form.querySelector('[name="name"]')
+const authorInput = form.querySelector('[name="author"]')
+const pagesInput = form.querySelector('[name="pages"]')
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    let name = e.target.querySelector('[name="name"]').value;
-    let author = e.target.querySelector('[name="author"]').value;
-    let pages = e.target.querySelector('[name="pages"]').value;
+    let name = nameInput.value;
+    let author = authorInput.value;
+    let pages = pagesInput.value;
     myLib.addBook(name, author, pages);
+})
+
+const addBook = document.querySelector('.add-book');
+addBook.addEventListener('mouseup', (e)=>{
+    let timeout = 0;
+    if (modal.classList.contains('scaled')) timeout = 300;
+    setTimeout(()=>{
+        modal.classList.toggle('scaled');
+        nameInput.value = "";
+        authorInput.value = "";
+        pagesInput.value = "";
+        modal.style.top = '30vh';
+        modal.style.left = '30vw';},timeout)
 })
 
 const myLib = new Library();
