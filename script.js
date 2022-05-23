@@ -39,13 +39,7 @@ Library.prototype.deleteBook = function(book){
     this.books = this.books.filter((entry)=> entry != book)
 }
 
-const myLib = new Library();
-myLib.addBook('Lotr','JK',200,false);
-myLib.addBook('Harry', 'Jojo', 120, true);
-myLib.addBook('Lotr','JK',200,false);
-
 const modal = document.querySelector('.modal')
-
 modal.onmousedown = (e)=> {
     let type = e.target.type;
     if (['text','submit','number'].indexOf(type) != -1) return;
@@ -59,6 +53,7 @@ modal.onmousedown = (e)=> {
         modal.style.left = (e.clientX - startX) + 'px';
     } 
 }
+modal.onmouseup = ()=> modal.onmousemove = null;
 document.onmousedown = (e) => {
     if (!modal.classList.contains('scaled')){
        const clickOut = !e.path.slice(0,-2).reduce((flag,e)=> {
@@ -69,7 +64,6 @@ document.onmousedown = (e) => {
     }
 
 }
-modal.onmouseup = ()=> modal.onmousemove = null;
 
 const addBook = document.querySelector('.add-book');
 addBook.addEventListener('click', (e)=>{
@@ -80,7 +74,6 @@ addBook.addEventListener('click', (e)=>{
 })
 
 const form = document.querySelector('form')
-
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     let name = e.target.querySelector('[name="name"]').value;
@@ -88,3 +81,5 @@ form.addEventListener('submit', (e)=>{
     let pages = e.target.querySelector('[name="pages"]').value;
     myLib.addBook(name, author, pages);
 })
+
+const myLib = new Library();
