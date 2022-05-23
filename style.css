@@ -105,7 +105,7 @@ body main h1{
 
 .container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(0px, clamp(300px, 50%,400px)));
     gap: 25px;
 }
 
