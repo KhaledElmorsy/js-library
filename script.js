@@ -12,6 +12,12 @@ function Book(name, author, pages) {
     this.card.querySelector('.name').innerText = name;
     this.card.querySelector('.author').innerText = author;
     this.card.querySelector('.pages').innerText = pages + " pages";
+    
+    this.readButton =  this.card.querySelector('.read');
+    this.readButton.innerText = 'Not read';
+    this.readButton.addEventListener('click', ()=> {
+        this.readToggle()});
+
     this.card.classList.toggle('template');
     this.card.book = this;
 
@@ -20,7 +26,10 @@ function Book(name, author, pages) {
 
 Book.prototype.readToggle = function(){
     this.read = !this.read;
-    this.card.classList.toggle("read")}
+    this.card.classList.toggle("read")
+    console.log(this.read)
+    this.readButton.innerText = (this.read)? 'Read' : 'Not read'
+}
 Book.prototype.removeCard = function(){
     this.card.addEventListener('transitionend', (e)=>e.target.remove())
     this.card.classList.add('remove');
