@@ -75,6 +75,7 @@ form.addEventListener('submit', (e)=>{
     let author = authorInput.value;
     let pages = pagesInput.value;
     myLib.addBook(name, author, pages);
+    modal.classList.toggle('scaled');
 })
 
 const addBook = document.querySelector('.add-book');
