@@ -64,5 +64,32 @@ modal.onmousedown = (e)=> {
         modal.style.left = (e.clientX - startX) + 'px';
     } 
 }
+document.onmousedown = (e) => {
+    if (!modal.classList.contains('scaled')){
+       const clickOut = !e.path.slice(0,-2).reduce((flag,e)=> {
+           return flag || !!e.classList.contains('modal');
+        },false)
 
+        if (clickOut) modal.classList.toggle('scaled');
+    }
+
+}
 modal.onmouseup = ()=> modal.onmousemove = null;
+
+const addBook = document.querySelector('.add-book');
+addBook.addEventListener('click', (e)=>{
+    modal.classList.toggle('scaled');
+    setTimeout(()=>{
+        modal.style.top = '30vh';
+        modal.style.left = '30vw';},200)
+})
+
+const form = document.querySelector('form')
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    let name = e.target.querySelector('[name="name"]').value;
+    let author = e.target.querySelector('[name="author"]').value;
+    let pages = e.target.querySelector('[name="pages"]').value;
+    myLib.addBook(name, author, pages);
+})
