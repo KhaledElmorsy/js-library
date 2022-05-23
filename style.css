@@ -217,16 +217,6 @@ main h1{
     cursor: grabbing;
 }
 
-.modal h1{
-    text-align: center;
-    font-size: 3rem;
-    display: grid;
-    place-items: center;
-    height: 25%;
-    background-color: var(--wood-dark);
-    color: var(--paper);
-}
-
 .modal form{
     display: flex;
     flex-direction: column;
