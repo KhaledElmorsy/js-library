@@ -18,6 +18,10 @@ function Book(name, author, pages) {
     this.readButton.addEventListener('click', ()=> {
         this.readToggle()});
 
+    this.card.querySelector('.delete').addEventListener('click',()=>{
+         myLib.deleteBook(this);
+    })
+
     this.card.classList.toggle('template');
     this.card.book = this;
 
