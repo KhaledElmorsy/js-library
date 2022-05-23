@@ -227,6 +227,7 @@ main h1{
     left:40vw;
     width:max(400px,40vw);
     height:400px;
+    z-index: 2;
 
     cursor: grab;
     transition: transform 0.5s ease-out;
