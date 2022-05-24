@@ -135,7 +135,7 @@ body main h1{
 
     transition: transform 0.7s ease-in,
                 opacity 0.7s ease-in,
-                outline 0.3s ease-out,
+                outline 0.2s ease-out,
                 box-shadow 0.3s ease-in-out;
 
     background-color: white;
