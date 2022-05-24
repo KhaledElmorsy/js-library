@@ -77,9 +77,24 @@ header .add-book{
     place-items: center;
 
     font-size: 2rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
 
     background-color: var(--paper);
-    box-shadow: 0 0 6px var(--shadow);
+    box-shadow: 0 0 6px var(--shadow),
+                inset 0 0 0px var(--shadow);
+}
+
+header .add-book:hover{
+    transform: translateY(1px);
+    box-shadow: 0 0 0px var(--shadow),
+    inset 0 0 7px var(--shadow);
+
+}
+
+header .add-book:active{
+    transition-duration:50ms;
+    transform: scale(0.95) translateY(3px);
 }
 
 header h2{
