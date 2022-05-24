@@ -301,6 +301,7 @@ main h1{
     text-indent: 5px;
 
     flex: 1 0 auto;
+    transition: 0.15s ease-out;
 
     background: none;
     border: none;
@@ -309,6 +310,11 @@ main h1{
 
 .modal input:focus{
     outline:none;
+}
+
+.modal input:invalid{
+    border-bottom:crimson 3px solid;
+    box-shadow: 0px 4px 3px -2px var(--shadow);
 }
 
 .modal button{

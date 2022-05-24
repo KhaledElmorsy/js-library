@@ -81,8 +81,20 @@ const form = document.querySelector('form')
 const nameInput = form.querySelector('[name="name"]')
 const authorInput = form.querySelector('[name="author"]')
 const pagesInput = form.querySelector('[name="pages"]')
+let inputData = [nameInput, authorInput, pagesInput]
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
+    let invalid = 0;
+    for (input of inputData){
+        if (input.value == ""){
+            input.setCustomValidity('Eneter a value')
+            input.reportValidity();
+            invalid += 1;
+        } else {input.setCustomValidity('')}
+    }
+    
+    if (invalid>0) return;
+
     let name = nameInput.value;
     let author = authorInput.value;
     let pages = pagesInput.value;
@@ -96,9 +108,10 @@ addBook.addEventListener('mouseup', (e)=>{
     if (modal.classList.contains('scaled')) timeout = 300;
     setTimeout(()=>{
         modal.classList.toggle('scaled');
-        nameInput.value = "";
-        authorInput.value = "";
-        pagesInput.value = "";
+        for (input of inputData){
+            input.value = "";
+            input.setCustomValidity('');
+        }
         modal.style.top = '30vh';
         modal.style.left = '30vw';},timeout)
 })
