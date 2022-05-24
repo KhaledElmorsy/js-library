@@ -68,7 +68,7 @@ modal.onmousedown = (e)=> {
 modal.onmouseup = ()=> modal.onmousemove = null;
 document.onmousedown = (e) => {
     if (!modal.classList.contains('scaled')){
-       const clickOut = !e.path.slice(0,-2).reduce((flag,e)=> {
+       const clickOut = !e.composedPath().slice(0,-2).reduce((flag,e)=> {
            return flag || !!e.classList.contains('modal');
         },false)
 
