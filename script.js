@@ -59,11 +59,18 @@ class Library {
     }
 }
 
+
+// Make modal draggable 
 const modal = document.querySelector('.modal')
 modal.onmousedown = (e) => {
+    // Disable drag moving if inputs or button are clicked
     let type = e.target.type;
     if (['text', 'submit', 'number'].indexOf(type) != -1) return;
 
+    /**Get initial distance between mouse pointer and element edges
+     * so that when dragging the element, its corner doesnt snap 
+     * to the pointer
+    */
     let styles = getComputedStyle(modal);
     startX = e.clientX - styles.left.replace('px', "");
     startY = e.clientY - styles.top.replace('px', "");
@@ -73,7 +80,9 @@ modal.onmousedown = (e) => {
         modal.style.left = (e.clientX - startX) + 'px';
     }
 }
+// Remove mousemove to stop draggin
 modal.onmouseup = () => modal.onmousemove = null;
+// Close modal when clicking outside
 document.onmousedown = (e) => {
         if (!modal.classList.contains('scaled')) {
             const clickOut = !e.composedPath().slice(0, -2).reduce((flag, e) => {
@@ -84,6 +93,7 @@ document.onmousedown = (e) => {
         }
 
     }
+
 
 const form = document.querySelector('form')
 const nameInput = form.querySelector('[name="name"]')
