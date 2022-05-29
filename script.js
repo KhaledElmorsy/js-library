@@ -2,98 +2,106 @@ const cardList = document.querySelector('.container');
 const cardTemplate = cardList.querySelector('.template')
 
 
-function Book(name, author, pages) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.read = false;
+class Book {
+    constructor(name, author, pages) {
+        this._name = name;
+        this._author = author;
+        this._pages = pages;
+        this._read = false;
 
-    this.card = cardTemplate.cloneNode(true);
-    this.card.querySelector('.name').innerText = name;
-    this.card.querySelector('.author').innerText = author;
-    this.card.querySelector('.pages').innerText = pages + " pages";
-    
-    this.readButton =  this.card.querySelector('.read');
-    this.readButton.innerText = 'Not read';
-    this.readButton.addEventListener('click', ()=> {
-        this.readToggle()});
+        // Set up HTML element from template
+        this.card = cardTemplate.cloneNode(true);
+        this.card.querySelector('.name').innerText = name;
+        this.card.querySelector('.author').innerText = author;
+        this.card.querySelector('.pages').innerText = pages + " pages";
 
-    this.card.querySelector('.delete').addEventListener('click',()=>{
-         myLib.deleteBook(this);
-    })
+        this.readButton = this.card.querySelector('.read');
+        this.readButton.innerText = 'Not read';
+        this.readButton.addEventListener('click', () => {
+            this.readToggle()
+        });
 
-    this.card.classList.toggle('template');
-    this.card.book = this;
+        this.card.querySelector('.delete').addEventListener('click', () => {
+            myLib.deleteBook(this);
+        })
 
-    cardList.appendChild(this.card);
+        this.card.classList.toggle('template');
+        this.card.book = this;
+
+        cardList.appendChild(this.card);
+    }
+
+    readToggle() {
+        this.read = !this.read;
+        this.card.classList.toggle("read")
+        this.readButton.innerText = (this.read) ? 'Read' : 'Not read'
+    }
+
+    removeCard() {
+        this.card.addEventListener('transitionend', (e) => e.target.remove())
+        this.card.classList.add('remove');
+    }
+
 }
 
-Book.prototype.readToggle = function(){
-    this.read = !this.read;
-    this.card.classList.toggle("read")
-    this.readButton.innerText = (this.read)? 'Read' : 'Not read'
-}
-Book.prototype.removeCard = function(){
-    this.card.addEventListener('transitionend', (e)=>e.target.remove())
-    this.card.classList.add('remove');
-}
 
+class Library {
+    constructor() {
+        this.books = [];
+    }
 
-function Library(){
-    this.books = [];
-}
-
-Library.prototype.addBook = function(name, author, pages){
-    this.books.push(new Book(name, author, pages));
-}
-Library.prototype.deleteBook = function(book){
-    book.removeCard();
-    this.books = this.books.filter((entry)=> entry != book)
+    addBook(name, author, pages) {
+        this.books.push(new Book(name, author, pages));
+    }
+    deleteBook(book) {
+        book.removeCard();
+        this.books = this.books.filter((entry) => entry != book)
+    }
 }
 
 const modal = document.querySelector('.modal')
-modal.onmousedown = (e)=> {
+modal.onmousedown = (e) => {
     let type = e.target.type;
-    if (['text','submit','number'].indexOf(type) != -1) return;
+    if (['text', 'submit', 'number'].indexOf(type) != -1) return;
 
     let styles = getComputedStyle(modal);
     startX = e.clientX - styles.left.replace('px', "");
     startY = e.clientY - styles.top.replace('px', "");
-    
-    modal.onmousemove = (e)=> {
+
+    modal.onmousemove = (e) => {
         modal.style.top = (e.clientY - startY) + 'px';
         modal.style.left = (e.clientX - startX) + 'px';
-    } 
-}
-modal.onmouseup = ()=> modal.onmousemove = null;
-document.onmousedown = (e) => {
-    if (!modal.classList.contains('scaled')){
-       const clickOut = !e.composedPath().slice(0,-2).reduce((flag,e)=> {
-           return flag || !!e.classList.contains('modal');
-        },false)
-
-        if (clickOut) modal.classList.toggle('scaled');
     }
-
 }
+modal.onmouseup = () => modal.onmousemove = null;
+document.onmousedown = (e) => {
+        if (!modal.classList.contains('scaled')) {
+            const clickOut = !e.composedPath().slice(0, -2).reduce((flag, e) => {
+                return flag || !!e.classList.contains('modal');
+            }, false)
+
+            if (clickOut) modal.classList.toggle('scaled');
+        }
+
+    }
 
 const form = document.querySelector('form')
 const nameInput = form.querySelector('[name="name"]')
 const authorInput = form.querySelector('[name="author"]')
 const pagesInput = form.querySelector('[name="pages"]')
 let inputData = [nameInput, authorInput, pagesInput]
-form.addEventListener('submit', (e)=>{
+form.addEventListener('submit', (e) => {
     e.preventDefault();
     let invalid = 0;
-    for (input of inputData){
-        if (input.value == ""){
+    for (input of inputData) {
+        if (input.value == "") {
             input.setCustomValidity('Eneter a value')
             input.reportValidity();
             invalid += 1;
-        } else {input.setCustomValidity('')}
+        } else { input.setCustomValidity('') }
     }
-    
-    if (invalid>0) return;
+
+    if (invalid > 0) return;
 
     let name = nameInput.value;
     let author = authorInput.value;
@@ -103,17 +111,19 @@ form.addEventListener('submit', (e)=>{
 })
 
 const addBook = document.querySelector('.add-book');
-addBook.addEventListener('mouseup', (e)=>{
+addBook.addEventListener('mouseup', (e) => {
+    // If the modal is visible, delay its reset to play the closing animation
     let timeout = 0;
     if (modal.classList.contains('scaled')) timeout = 300;
-    setTimeout(()=>{
+    setTimeout(() => {
         modal.classList.toggle('scaled');
-        for (input of inputData){
+        for (input of inputData) {
             input.value = "";
             input.setCustomValidity('');
         }
         modal.style.top = '30vh';
-        modal.style.left = '30vw';},timeout)
+        modal.style.left = '30vw';
+    }, timeout)
 })
 
 const myLib = new Library();
